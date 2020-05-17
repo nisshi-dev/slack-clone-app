@@ -3,7 +3,11 @@
     <div class="chats-layout">
       <messages />
     </div>
-    <div class="input-layout" />
+    <div class="input-layout">
+      <div class="input-container">
+        <textarea></textarea>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -29,5 +33,15 @@ export default {
 
   .input-layout {
     height: 10%;
+  }
+
+  .input-container {
+    padding: 10px;
+    height: 100%;
+  }
+
+  textarea {
+    width: 100%;
+    height: 100%;
   }
 </style>
