@@ -1,10 +1,17 @@
 <template>
   <div class="input-container">
-    <textarea></textarea>
+    <textarea @click="login" />
   </div>
 </template>
 
 <script>
+export default {
+  methods: {
+    login () {
+      window.alert('ログインしろよ')
+    }
+  }
+}
 </script>
 
 <style scoped>
