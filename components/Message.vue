@@ -4,7 +4,7 @@
       <img v-bind:src="message.user.thumbnail" />
     </div>
     <div class="message-container">
-      <div class="user-name">{{ message.user.name }}</div>
+      <div class="user-name">{{ displayName }}</div>
       <div class="message">{{ message.text }}</div>
     </div>
   </div>
@@ -21,6 +21,11 @@ export default {
           name: 'note'
         }
       }
+    }
+  },
+  computed: {
+    displayName() {
+      return "@" + this.message.user.name
     }
   }
 }
