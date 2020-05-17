@@ -24,8 +24,8 @@ export default {
     }
   },
   computed: {
-    displayName() {
-      return "@" + this.message.user.name
+    displayName () {
+      return `@${this.message.user.name}`
     }
   }
 }
