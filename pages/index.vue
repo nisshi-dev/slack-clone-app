@@ -1,6 +1,9 @@
 <template>
   <div class="container">
-    <messages />
+    <div class="chats-layout">
+      <messages />
+    </div>
+    <div class="input-layout" />
   </div>
 </template>
 
@@ -15,4 +18,16 @@ export default {
 </script>
 
 <style scoped>
+  .container {
+    height: 100%;
+  }
+
+  .chats-layout {
+    overflow: scroll;
+    height: 90%;
+  }
+
+  .input-layout {
+    height: 10%;
+  }
 </style>

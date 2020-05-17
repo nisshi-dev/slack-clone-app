@@ -1,7 +1,8 @@
 <template>
   <div class="chats-container">
-    <message />
-    <message />
+    <div v-for="item in 15" :key="item.number">
+      <message />
+    </div>
   </div>
 </template>
 
