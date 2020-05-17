@@ -1,16 +1,29 @@
 <template>
   <div class="chat-container">
     <div class="thumbnail-container">
-      <img src="https://ca.slack-edge.com/T080R6JAE-UFJ230JH0-5eed01d30f7d-512" />
+      <img v-bind:src="message.user.thumbnail" />
     </div>
     <div class="message-container">
-      <div class="user-name">NSD</div>
-      <div class="message">今日も良い天気ですね</div>
+      <div class="user-name">{{ message.user.name }}</div>
+      <div class="message">{{ message.text }}</div>
     </div>
   </div>
 </template>
 
 <script>
+export default {
+  data () {
+    return {
+      message: {
+        text: '今日も良い天気ですね',
+        user: {
+          thumbnail: 'https://ca.slack-edge.com/T080R6JAE-UFJ230JH0-5eed01d30f7d-512',
+          name: 'note'
+        }
+      }
+    }
+  }
+}
 </script>
 
 <style scoped>
