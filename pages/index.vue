@@ -1,12 +1,13 @@
 <template>
-  <div class="container">
-  </div>
+  <div class="container" />
 </template>
 
 <script>
 
 export default {
-  methods: {
+  mounted () {
+    console.log(this.$store.state.user)
+    console.log(this.$store.getters.isAuthenticated)
   }
 }
 </script>
