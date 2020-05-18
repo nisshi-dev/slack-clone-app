@@ -1,7 +1,8 @@
 <template>
   <div class="input-container">
-    <textarea v-model="text" v-if="isAuthenticated" v-on:keydown.enter="addMessage" />
-    <textarea v-model="text" v-else v-on:click="oepnLoginModal" />
+    <img v-if="isAuthenticated" :src="user.photoURL" class="avatar">
+    <textarea v-if="isAuthenticated" v-model="text" @keydown.enter="addMessage" />
+    <textarea v-else v-model="text" @click="openLoginModal" />
     <el-dialog
       title=""
       :visible.sync="dialogVisible"
@@ -30,6 +31,9 @@ export default {
     }
   },
   computed: {
+    user () {
+      return this.$store.state.user
+    },
     isAuthenticated () {
       return this.$store.getters.isAuthenticated
     }
@@ -47,7 +51,11 @@ export default {
       const channelId = this.$route.params.id
       db.collection('channels').doc(channelId).collection('messages').add({
         text: this.text,
-        createdAt: new Date().getTime()
+        createdAt: new Date().getTime(),
+        user: {
+          name: this.user.displayName,
+          thumbnail: this.user.photoURL
+        }
       }).then(() => {
         this.text = null
       })
@@ -76,6 +84,12 @@ export default {
   .input-container {
     padding: 10px;
     height: 100%;
+    display: flex;
+  }
+
+  .avatar {
+    height: 100%;
+    width: auto;
   }
 
   textarea {
