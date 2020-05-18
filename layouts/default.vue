@@ -7,7 +7,9 @@
           {{ channel.name }}
         </nuxt-link>
       </p>
-      <p v-if="isAuthenticated" class="logout" v-on:click="logout">ログアウト</p>
+      <p v-if="isAuthenticated" class="logout" @click="logout">
+        ログアウト
+      </p>
     </div>
     <div class="main-content">
       <nuxt />
@@ -16,6 +18,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import { db, firebase } from '~/plugins/firebase'
 
 export default {
@@ -30,9 +33,11 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['setUser']),
     logout () {
       firebase.auth().signOut()
         .then(() => {
+          this.setUser(null)
           window.alert('ログアウトに成功！')
         })
         .catch((e) => {
