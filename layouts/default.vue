@@ -47,6 +47,11 @@ export default {
     }
   },
   mounted () {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setUser(user)
+      }
+    })
     db.collection('channels').get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
