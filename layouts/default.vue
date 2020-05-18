@@ -7,6 +7,7 @@
           {{ channel.name }}
         </nuxt-link>
       </p>
+      <p class="logout">ログアウト</p>
     </div>
     <div class="main-content">
       <nuxt />
@@ -56,5 +57,11 @@ export default {
     width: 100%;
     height: 100vh;
     background: #F1F1F1;
+  }
+
+  .logout {
+    position: absolute;
+    bottom: 10px;
+    cursor: pointer;
   }
 </style>
