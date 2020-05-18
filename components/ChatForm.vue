@@ -1,6 +1,7 @@
 <template>
   <div class="input-container">
-    <textarea v-model="text" @click="openLoginModal" @keydown.enter="addMessage" />
+    <textarea v-model="text" v-if="isAuthenticated" v-on:keydown.enter="addMessage" />
+    <textarea v-model="text" v-else v-on:click="oepnLoginModal" />
     <el-dialog
       title=""
       :visible.sync="dialogVisible"
@@ -26,6 +27,11 @@ export default {
     return {
       dialogVisible: false,
       text: null
+    }
+  },
+  computed: {
+    isAuthenticated () {
+      return this.$store.getters.isAuthenticated
     }
   },
   mounted () {
