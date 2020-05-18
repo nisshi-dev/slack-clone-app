@@ -7,7 +7,7 @@
           {{ channel.name }}
         </nuxt-link>
       </p>
-      <p class="logout">ログアウト</p>
+      <p v-if="isAuthenticated" class="logout" v-on:click="logout">ログアウト</p>
     </div>
     <div class="main-content">
       <nuxt />
@@ -16,12 +16,29 @@
 </template>
 
 <script>
-import { db } from '~/plugins/firebase'
+import { db, firebase } from '~/plugins/firebase'
 
 export default {
   data () {
     return {
       channels: []
+    }
+  },
+  computed: {
+    isAuthenticated () {
+      return this.$store.getters.isAuthenticated
+    }
+  },
+  methods: {
+    logout () {
+      firebase.auth().signOut()
+        .then(() => {
+          window.alert('ログアウトに成功！')
+        })
+        .catch((e) => {
+          window.alert('ログアウトに失敗しました')
+          console.log(e)
+        })
     }
   },
   mounted () {
