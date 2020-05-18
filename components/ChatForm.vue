@@ -1,13 +1,13 @@
 <template>
   <div class="input-container">
-    <textarea v-model="text" v-on:click="openLoginModal" @keydown.enter="addMessage" />
+    <textarea v-model="text" @click="openLoginModal" @keydown.enter="addMessage" />
     <el-dialog
       title=""
       :visible.sync="dialogVisible"
       width="30%"
     >
       <div class="image-container">
-        <img src="~/assets/google_sign_in.png" />
+        <img src="~/assets/google_sign_in.png" @click="login">
       </div>
     </el-dialog>
   </div>
@@ -16,7 +16,7 @@
 <script>
 import Vue from 'vue'
 import ElementUI from 'element-ui'
-import { db } from '~/plugins/firebase'
+import { db, firebase } from '~/plugins/firebase'
 import 'element-ui/lib/theme-chalk/index.css'
 Vue.use(ElementUI)
 
@@ -44,6 +44,17 @@ export default {
     keyDownedForJPConversion (event) {
       const codeForConversion = 229
       return event.keyCode === codeForConversion
+    },
+    login () {
+      const provider = new firebase.auth.GoogleAuthProvider()
+      firebase.auth().signInWithPopup(provider)
+        .then((result) => {
+          const user = result.user
+          console.log(user)
+          this.dialogVisible = false
+        }).catch((error) => {
+          window.alert(error)
+        })
     }
   }
 }
